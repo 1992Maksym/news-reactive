@@ -1,8 +1,9 @@
 import classes from './Main.module.scss'
-import Banner from '../../components/Banner/Banner'
 import { useEffect, useState } from 'react'
 import getNews from '../../api/apiNews'
+import Banner from '../../components/Banner/Banner'
 import NewsList from '../../components/NewsList/NewsList'
+import Skeleton from '../../components/Skeleton/Skeleton'
 
 export default function Main(){
     const [news, setNews] = useState()
@@ -23,7 +24,7 @@ export default function Main(){
                 <>
                     <Banner item={news[0]} />
                     <NewsList list={news} />
-                </> : null
+                </> : <Skeleton/>
             }
         </main>
     )
