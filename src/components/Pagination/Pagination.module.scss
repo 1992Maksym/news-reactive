@@ -1,0 +1,21 @@
+.paginationBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    .paginationArrow,
+    .paginationButton{
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .paginationButton:disabled,
+    .paginationArrow:disabled{
+        cursor: default;
+    }
+    .active {
+        background-color: lightgray;
+    }
+}
+
