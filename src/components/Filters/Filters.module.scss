@@ -1,0 +1,29 @@
+.filters{
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+
+    .category,
+    .active{
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        background-color: lightgray;
+        border-radius: 32px;
+        border: none;
+    }
+    .active{
+        background-color: lightgray;
+        color: blueviolet;
+        border: 1px solid blueviolet;
+    }
+
+    ::-webkit-scrollbar{
+        display: none;
+    }
+}
+
