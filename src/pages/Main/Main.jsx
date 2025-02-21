@@ -6,20 +6,26 @@ import NewsList from '../../components/NewsList/NewsList'
 import Skeleton from '../../components/Skeleton/Skeleton'
 import Pagination from '../../components/Pagination/Pagination'
 import Filters from '../../components/Filters/Filters'
+import Search from '../../components/Search/Search'
+import { debounceTime } from '../../hooks/debounceTime'
 
 export default function Main(){
     const [news, setNews] = useState()
     const [currentPage, setCurrentPage] = useState(1)
     const [categories, setCategories] = useState()
     const [currentCategory, setCurrentCategory] = useState('all')
+    const [keyWords, setKeyWords] = useState()
     const pageSize = 10
     const paginationPages = 10
+
+    const debounceKeyword = debounceTime(keyWords, 1000)
 
     const fetchData = async (currentPage) => {
         try {
             const news = await getNews({
                 page_number: currentPage, 
                 page_size: pageSize,
+                keywords: debounceKeyword,
                 category: currentCategory === 'all' ? categories : currentCategory
             })
             setNews(news.news)
@@ -42,7 +48,7 @@ export default function Main(){
 
     useEffect(()=> {
         fetchData(currentPage)
-    },[currentPage,currentCategory])
+    },[currentPage,currentCategory,debounceKeyword])
 
     const clickBtn = (index) => {
         setCurrentPage(index)
@@ -64,6 +70,10 @@ export default function Main(){
                         categories={categories}
                         setCurrentCategory={setCurrentCategory}
                         currentCategory={currentCategory}
+                    />
+                    <Search 
+                        keyWords = {keyWords}
+                        setKeyWords = {setKeyWords}
                     />
                     <Banner item={news[0]} />
                     <Pagination 
