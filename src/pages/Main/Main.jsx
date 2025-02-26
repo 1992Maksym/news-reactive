@@ -1,5 +1,5 @@
 import classes from './Main.module.scss'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {getNews, getCategories} from '../../api/apiNews'
 import Banner from '../../components/Banner/Banner'
 import NewsList from '../../components/NewsList/NewsList'
@@ -8,66 +8,35 @@ import Pagination from '../../components/Pagination/Pagination'
 import Filters from '../../components/Filters/Filters'
 import Search from '../../components/Search/Search'
 import { debounceTime } from '../../hooks/debounceTime'
+import { useFetch } from '../../hooks/useFetch'
+import {PAGE_SIZE, PAGINATION_PAGES} from '../../constants/constants'
+import { arrowClickHandler } from '../../hooks/arrowClickHandler'
 
 export default function Main(){
-    const [news, setNews] = useState()
     const [currentPage, setCurrentPage] = useState(1)
-    const [categories, setCategories] = useState()
-    const [currentCategory, setCurrentCategory] = useState('all')
-    const [keyWords, setKeyWords] = useState()
-    const pageSize = 10
-    const paginationPages = 10
+    const [currentCategory, setCurrentCategory] = useState(null)
+    const [keyWords, setKeyWords] = useState("")
+
 
     const debounceKeyword = debounceTime(keyWords, 1000)
 
-    const fetchData = async (currentPage) => {
-        try {
-            const news = await getNews({
-                page_number: currentPage, 
-                page_size: pageSize,
-                keywords: debounceKeyword,
-                category: currentCategory === 'all' ? categories : currentCategory
-            })
-            setNews(news.news)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    const fetchCategories = async () => {
-        try {
-            const response = await getCategories()
-            setCategories(['all', ...response.categories])
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const {data: dataCategories, error: errorCategories} = useFetch(getCategories)
 
-    useEffect(()=> {
-        fetchCategories()
-    },[])
+    const {data: dataNews, error: errorNews} = useFetch(getNews, {
+        page_number: currentPage, 
+        page_size: PAGE_SIZE,
+        keywords: debounceKeyword,
+        category: currentCategory
+    })
 
-    useEffect(()=> {
-        fetchData(currentPage)
-    },[currentPage,currentCategory,debounceKeyword])
-
-    const clickBtn = (index) => {
-        setCurrentPage(index)
-    }
-    const clickRightArrow = () => {
-        if(currentPage < paginationPages) setCurrentPage(currentPage + 1)
-    }
-    const clickLeftArrow = () => {
-        if(currentPage > 1) setCurrentPage(currentPage - 1)
-    }
-
+    const {clickBtn, clickRightArrow, clickLeftArrow} = arrowClickHandler(currentPage,setCurrentPage,PAGINATION_PAGES)
     
-
     return (
         <main className={classes.main}>
-            { news ? 
+            { dataNews ? 
                 <>
                     <Filters
-                        categories={categories}
+                        categories = {dataCategories.categories}
                         setCurrentCategory={setCurrentCategory}
                         currentCategory={currentCategory}
                     />
@@ -75,15 +44,15 @@ export default function Main(){
                         keyWords = {keyWords}
                         setKeyWords = {setKeyWords}
                     />
-                    <Banner item={news[0]} />
+                    <Banner item={dataNews.news[0]} />
                     <Pagination 
-                        paginationPages={paginationPages} 
+                        paginationPages={PAGINATION_PAGES} 
                         currentPage={currentPage}
                         clickBtn={clickBtn}
                         clickRightArrow={clickRightArrow}
                         clickLeftArrow={clickLeftArrow}
                     />
-                    <NewsList list={news} />
+                    <NewsList list={dataNews.news} />
                 </> : <Skeleton/>
             }
         </main>

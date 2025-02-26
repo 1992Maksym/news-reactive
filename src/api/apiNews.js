@@ -41,4 +41,3 @@ export const getCategories = async () => {
 }
 
 export default { getNews, getCategories }
-// export default getNews
