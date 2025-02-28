@@ -1,16 +1,16 @@
 import classes from './Main.module.scss'
+import { PAGE_SIZE, PAGINATION_PAGES } from '../../constants/constants'
 import { useState } from 'react'
-import {getNews, getCategories} from '../../api/apiNews'
+import { getNews, getCategories } from '../../api/apiNews'
+import { debounceTime } from '../../hooks/debounceTime'
+import { useFetch } from '../../hooks/useFetch'
+import { arrowClickHandler } from '../../hooks/arrowClickHandler'
 import Banner from '../../components/Banner/Banner'
 import NewsList from '../../components/NewsList/NewsList'
 import Skeleton from '../../components/Skeleton/Skeleton'
 import Pagination from '../../components/Pagination/Pagination'
-import Filters from '../../components/Filters/Filters'
-import Search from '../../components/Search/Search'
-import { debounceTime } from '../../hooks/debounceTime'
-import { useFetch } from '../../hooks/useFetch'
-import {PAGE_SIZE, PAGINATION_PAGES} from '../../constants/constants'
-import { arrowClickHandler } from '../../hooks/arrowClickHandler'
+import NewsFilters from '../../components/NewsFilters/NewsFilters'
+
 
 export default function Main(){
     const [currentPage, setCurrentPage] = useState(1)
@@ -35,16 +35,16 @@ export default function Main(){
         <main className={classes.main}>
             { dataNews ? 
                 <>
-                    <Filters
+
+                    <NewsFilters 
                         categories = {dataCategories.categories}
                         setCurrentCategory={setCurrentCategory}
                         currentCategory={currentCategory}
-                    />
-                    <Search 
                         keyWords = {keyWords}
                         setKeyWords = {setKeyWords}
                     />
                     <Banner item={dataNews.news[0]} />
+                    <NewsList list={dataNews.news} />
                     <Pagination 
                         paginationPages={PAGINATION_PAGES} 
                         currentPage={currentPage}
@@ -52,7 +52,7 @@ export default function Main(){
                         clickRightArrow={clickRightArrow}
                         clickLeftArrow={clickLeftArrow}
                     />
-                    <NewsList list={dataNews.news} />
+                    
                 </> : <Skeleton/>
             }
         </main>
