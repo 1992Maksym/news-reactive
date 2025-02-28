@@ -1,0 +1,4 @@
+const PAGE_SIZE = 10
+const PAGINATION_PAGES = 10
+
+export { PAGE_SIZE, PAGINATION_PAGES }
