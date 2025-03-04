@@ -1,7 +1,7 @@
 import classes from './Main.module.scss'
 import { PAGE_SIZE, PAGINATION_PAGES } from '../../constants/constants'
 import { useState } from 'react'
-import { getNews, getCategories } from '../../api/apiNews'
+import { getNews } from '../../api/apiNews'
 import { debounceTime } from '../../hooks/debounceTime'
 import { useFetch } from '../../hooks/useFetch'
 import { arrowClickHandler } from '../../hooks/arrowClickHandler'
@@ -20,7 +20,6 @@ export default function Main(){
 
     const debounceKeyword = debounceTime(keyWords, 1000)
 
-    const {data: dataCategories, error: errorCategories} = useFetch(getCategories)
 
     const {data: dataNews, error: errorNews} = useFetch(getNews, {
         page_number: currentPage, 
@@ -37,7 +36,6 @@ export default function Main(){
                 <>
 
                     <NewsFilters 
-                        categories = {dataCategories.categories}
                         setCurrentCategory={setCurrentCategory}
                         currentCategory={currentCategory}
                         keyWords = {keyWords}

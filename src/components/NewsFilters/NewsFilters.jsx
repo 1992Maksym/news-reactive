@@ -1,17 +1,20 @@
 import Filters from "../Filters/Filters"
 import Search from "../Search/Search"
+import { getCategories } from "../../api/apiNews"
 
 export default function NewsFilters({
-    categories,
     setCurrentCategory,
     currentCategory,
     keyWords,
     setKeyWords
 }){
+
+    const {data: dataCategories, error: errorCategories} = useFetch(getCategories)
+
     return(
         <>
             <Filters
-                categories = {categories}
+                categories = {dataCategories}
                 setCurrentCategory={setCurrentCategory}
                 currentCategory={currentCategory}
             />
