@@ -5,6 +5,7 @@ import { getNews } from '../../api/apiNews'
 import { debounceTime } from '../../hooks/debounceTime'
 import { useFetch } from '../../hooks/useFetch'
 import { arrowClickHandler } from '../../hooks/arrowClickHandler'
+import { getCategories } from '../../api/apiNews'
 import Banner from '../../components/Banner/Banner'
 import NewsList from '../../components/NewsList/NewsList'
 import Skeleton from '../../components/Skeleton/Skeleton'
@@ -20,6 +21,7 @@ export default function Main(){
 
     const debounceKeyword = debounceTime(keyWords, 1000)
 
+    const {data: dataCategories, error: errorCategories} = useFetch(getCategories)
 
     const {data: dataNews, error: errorNews} = useFetch(getNews, {
         page_number: currentPage, 
@@ -40,6 +42,7 @@ export default function Main(){
                         currentCategory={currentCategory}
                         keyWords = {keyWords}
                         setKeyWords = {setKeyWords}
+                        categories = {dataCategories.categories}
                     />
                     <Banner item={dataNews.news[0]} />
                     <NewsList list={dataNews.news} />
