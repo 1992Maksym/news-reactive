@@ -1,8 +1,9 @@
+import { forwardRef } from 'react'
 import classes from './Filters.module.scss'
 
-export default function Filters({categories,setCurrentCategory,currentCategory}) {
+const  Filters = forwardRef(({categories,setCurrentCategory,currentCategory}, ref) => {
     return(
-        <div className={classes.filters}>
+        <div ref={ref} className={classes.filters}>
             <button 
                 onClick={() => setCurrentCategory(null)}
                 className={currentCategory===null?classes.active:classes.category}
@@ -16,4 +17,6 @@ export default function Filters({categories,setCurrentCategory,currentCategory})
             })}
         </div>
     )
-}
+})
+
+export default Filters
