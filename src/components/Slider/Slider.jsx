@@ -6,10 +6,8 @@ export default function Slider({children}){
 
     const handleArrow = (direction) => {
         if (direction === 'left') {
-            console.log('left:  ' + sliderRef.current)
             sliderRef ? (sliderRef.current.scrollLeft -= 200) : null;
         } else {
-            console.log('right:  ' + sliderRef.current)
             sliderRef ? (sliderRef.current.scrollLeft += 200) : null;
         }
       }
