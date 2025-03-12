@@ -1,5 +1,6 @@
 import classes from './Header.module.scss'
 import formatDate from '../../helpers/date'
+import React from 'react'
 
 export default function Header(){
     return(

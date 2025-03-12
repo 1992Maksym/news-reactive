@@ -1,4 +1,14 @@
+import React from 'react'
 import classes from './Pagination.module.scss'
+import { ArrowClick } from '../../interfaces'
+
+interface Props{
+    paginationPages: number,
+    currentPage: number,
+    clickBtn: Function,
+    clickLeftArrow: ArrowClick,
+    clickRightArrow: ArrowClick,
+}
 
 export default function Pagination(
     {
@@ -7,8 +17,7 @@ export default function Pagination(
         clickBtn,
         clickLeftArrow,
         clickRightArrow,
-
-    }){
+    }: Props){
 
     return(
         <div className={classes.paginationBlock}>

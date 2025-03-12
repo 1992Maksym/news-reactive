@@ -1,4 +1,4 @@
-const formatTimeAgo = (publishedDate) => {
+const formatTimeAgo = (publishedDate:string) => {
     const newTime = (new Date()).getTime()
     const publishedTime = (new Date(publishedDate)).getTime()
     const differentsTime = (newTime - publishedTime)/1000

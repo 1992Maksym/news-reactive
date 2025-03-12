@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import { FetchFunc, UseFetchResult } from "../interfaces"
 
-export const useFetch = (fetchFunction, params) => {
-  const [data, setData] = useState(null)
+export const useFetch = <T,P>(fetchFunction: FetchFunc<T,P>, params?: P):UseFetchResult<T> => {
+
+  const [data, setData] = useState<T | null>(null)
   const [error, setError] = useState(null)
   const stringParams = params ? new URLSearchParams(params).toString() : null
 
