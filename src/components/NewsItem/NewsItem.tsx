@@ -1,7 +1,12 @@
+import React from 'react'
 import formatTimeAgo from '../../helpers/formatTimeAgo'
+import { INews } from '../../interfaces'
 import classes from './NewsItem.module.scss'
 
-export default function NewsItem({item}){
+interface Props{item: INews}
+
+export default function NewsItem({item}: Props){
+
     return(
         <li className={classes.newsItem}>
             <div className={classes.imgWrapper} style={{backgroundImage: `url(${item.image})`}}></div>
