@@ -2,6 +2,7 @@ import React from "react"
 import Filters from "../Filters/Filters"
 import Search from "../Search/Search"
 import { KeyWords } from "../../interfaces"
+import Slider from "../Slider/Slider"
 
 interface Props{
     setCurrentCategory: Function,
@@ -21,11 +22,13 @@ export default function NewsFilters({
 
     return(
         <>
-            <Filters
-                categories = {categories}
-                setCurrentCategory={setCurrentCategory}
-                currentCategory={currentCategory}
-            />
+            <Slider>
+                <Filters
+                    categories = {categories}
+                    setCurrentCategory={setCurrentCategory}
+                    currentCategory={currentCategory}
+                />
+            </Slider>
             <Search 
                 keyWords = {keyWords}
                 setKeyWords = {setKeyWords}
