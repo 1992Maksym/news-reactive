@@ -1,6 +1,13 @@
+import React from 'react'
 import classes from './Search.module.scss'
+import { KeyWords } from '../../interfaces'
 
-export default function Search({keyWords, setKeyWords}) {
+interface Props{
+    keyWords: KeyWords,
+    setKeyWords: Function
+}
+
+export default function Search({keyWords, setKeyWords}: Props) {
     return(
         <div className={classes.search}>
             <input 

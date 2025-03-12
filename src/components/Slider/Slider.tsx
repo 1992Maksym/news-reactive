@@ -1,14 +1,14 @@
-import React,{ useEffect, useRef } from 'react'
+import React,{ Ref, useEffect, useRef } from 'react'
 import classes from './Slider.module.scss'
 
 export default function Slider({children}){
-    const sliderRef = useRef(null)
+    const sliderRef = useRef<HTMLElement | null>(null)
 
     const handleArrow = (direction) => {
         if (direction === 'left') {
-            sliderRef ? (sliderRef.current.scrollLeft -= 200) : null;
+            sliderRef.current ? (sliderRef.current.scrollLeft -= 200) : null;
         } else {
-            sliderRef ? (sliderRef.current.scrollLeft += 200) : null;
+            sliderRef.current ? (sliderRef.current.scrollLeft += 200) : null;
         }
       }
 

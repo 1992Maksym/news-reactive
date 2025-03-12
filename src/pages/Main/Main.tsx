@@ -11,6 +11,7 @@ import NewsList from '../../components/NewsList/NewsList'
 import Skeleton from '../../components/Skeleton/Skeleton'
 import Pagination from '../../components/Pagination/Pagination'
 import NewsFilters from '../../components/NewsFilters/NewsFilters'
+import React from 'react'
 
 
 export default function Main(){
@@ -42,10 +43,10 @@ export default function Main(){
                         currentCategory={currentCategory}
                         keyWords = {keyWords}
                         setKeyWords = {setKeyWords}
-                        categories = {dataCategories.categories}
+                        categories = {dataCategories?.categories}
                     />
-                    <Banner item={dataNews.news[0]} />
-                    <NewsList list={dataNews.news} />
+                    <Banner item={dataNews?.news[0]} />
+                    <NewsList list={dataNews?.news} />
                     <Pagination 
                         paginationPages={PAGINATION_PAGES} 
                         currentPage={currentPage}

@@ -1,9 +1,9 @@
 export const arrowClickHandler = (
-  currentPage,
-  setCurrentPage,
-  PAGINATION_PAGES
+  currentPage: number,
+  setCurrentPage: Function,
+  PAGINATION_PAGES: number
 ) => {
-  const clickBtn = (index) => {
+  const clickBtn = (index: number) => {
     setCurrentPage(index)
   }
   const clickRightArrow = () => {

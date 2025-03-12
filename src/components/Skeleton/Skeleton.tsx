@@ -1,3 +1,4 @@
+import React from 'react'
 import classes from './Skeleton.module.scss'
 
 export default function Skeleton(){
