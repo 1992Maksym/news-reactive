@@ -1,15 +1,33 @@
 .header{
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     border-bottom: 1px solid #f2f4f2;
     width: 100%;
     padding: 12px 24px;
     gap: 12px;
 
-    .logo{
-        font-size: 20px;
+    .info{
+        display: flex;
+        flex-direction: column;
+
+        .logo{
+            font-size: 20px;
+        }
+        .date{
+            font-size: 16px;
+        }
     }
-    .date{
-        font-size: 16px;
+
+    .themeImg{
+        width: 30px;
     }
+}
+
+.dark{
+    background-color: #272727;
+    color: white;
+}
+.light{
+    background-color: white;
+    color: #272727;
 }

@@ -11,3 +11,16 @@
         background-color: white;
     }
 }
+
+.slider.dark{
+    .arrow{
+        background-color: #272727;
+        color: white;
+    }
+}
+.slider.light{
+    .arrow{
+        background-color: white;
+        color: #272727;
+    }
+}
