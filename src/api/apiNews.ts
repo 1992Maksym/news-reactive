@@ -15,7 +15,7 @@ export const getNews = async <T,P>(params? : ParamsType<T,P>) => {
     const response = await axios.get(`${BASE_URL}search`, {
       params: {
         // API_KEY is not working here
-        apiKey: '0beVXFRSLYHjbJpNQQ2RFboSWVh2RmYzgAMLiQQsXpv2FEUr',
+        apiKey: 'knnQvKS8z2kkDe6LTTFppsn_w2chDGNnpF56Wo3Pikcl2P4x',
         page_number,
         page_size,
         category,
@@ -33,7 +33,7 @@ export const getCategories = async () => {
     const response = await axios.get(`${BASE_URL}available/categories`, {
       params: {
         // API_KEY is not working here
-        apiKey: '0beVXFRSLYHjbJpNQQ2RFboSWVh2RmYzgAMLiQQsXpv2FEUr',
+        apiKey: 'knnQvKS8z2kkDe6LTTFppsn_w2chDGNnpF56Wo3Pikcl2P4x',
       },
     })
     return response.data

@@ -14,8 +14,27 @@
     .paginationArrow:disabled{
         cursor: default;
     }
-    .active {
-        background-color: lightgray;
+    
+}
+
+.paginationBlock.dark{
+    .paginationArrow,
+    .paginationButton {
+        background-color: #272727;
+        color: white;
+    }
+    .paginationButton.active {
+        color: red;
+    }
+}
+.paginationBlock.light{
+    .paginationArrow,
+    .paginationButton {
+        background-color: white;
+        color: #272727;
+    }
+    .paginationButton.active {
+        color: red;
     }
 }
 

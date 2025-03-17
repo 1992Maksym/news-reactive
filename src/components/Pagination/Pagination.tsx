@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import classes from './Pagination.module.scss'
 import { ArrowClick } from '../../interfaces'
+import { useTheme } from '../../context/themeContext'
 
 interface Props{
     paginationPages: number,
@@ -19,8 +20,10 @@ export default function Pagination(
         clickRightArrow,
     }: Props){
 
+    const {isDark} = useTheme()
+
     return(
-        <div className={classes.paginationBlock}>
+        <div className={`${classes.paginationBlock} ${isDark? classes.dark : classes.light}`}>
             <button 
                 disabled={currentPage<=1} 
                 onClick={clickLeftArrow} 
@@ -31,8 +34,8 @@ export default function Pagination(
                 return <button 
                             key={index} 
                             onClick={() => clickBtn(index + 1)} 
-                            className={classes.paginationButton}
                             disabled={currentPage === index + 1}
+                            className={`${classes.paginationButton} ${currentPage === index + 1 ? classes.active : false}`}
                         >{index + 1}</button>
             })}
 
